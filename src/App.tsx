@@ -1,27 +1,41 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+import React from 'react';
+import { ConfigProvider } from 'antd';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import GlobalStyles from './styles/GlobalStyles';
+import { antdTheme } from './styles/theme';
+import Layout from './components/layout/Layout';
+import Home from './pages/Home';
+import Dashboard from './pages/Dashboard';
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+// Styled components theme
+const styledTheme = {
+  colors: {
+    primary: '#1890ff',
+    secondary: '#722ed1',
+    success: '#52c41a',
+    warning: '#fa8c16',
+    error: '#ff4d4f',
+  },
+};
+
+const App: React.FC = () => {
+  return (
+    <ConfigProvider theme={antdTheme}>
+      <ThemeProvider theme={styledTheme}>
+        <GlobalStyles />
+        <Router>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
+          </Layout>
+        </Router>
+      </ThemeProvider>
+    </ConfigProvider>
+  );
+};
 
 export default App;
