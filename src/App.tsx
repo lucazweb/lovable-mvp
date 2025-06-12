@@ -1,13 +1,12 @@
-
 import React from 'react';
 import { ConfigProvider } from 'antd';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import GlobalStyles from './styles/GlobalStyles';
-import { antdTheme } from './styles/theme';
-import Layout from './components/layout/Layout';
-import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
+import GlobalStyles from './presentation/styles/GlobalStyles';
+import { antdTheme } from './presentation/styles/theme';
+import Layout from './presentation/components/layout/Layout';
+import Home from './presentation/pages/Home';
+import Dashboard from './presentation/pages/Dashboard';
 
 // Styled components theme
 const styledTheme = {
